@@ -32,7 +32,9 @@ class ChefTimestamp < Chef::Handler
 
     def report
       if run_status.success?
-        ::File.open("#{Chef::Config[:file_cache_path]}/chef-success-timestamp", 'w') {|f| f.puts Time.now.to_i}
+        time = Time.now.to_i
+        Chef::Log.info "Generating new Chef success timestamp with value #{time}"
+        ::File.open("#{Chef::Config[:file_cache_path]}/chef-success-timestamp", 'w') {|f| f.puts time}
       end
     end
 
